@@ -28,6 +28,7 @@ SplashScreen.preventAutoHideAsync();
 export default function RootLayout() {
   const [loaded, error] = useFonts({
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
+    Excalifont: require("../assets/fonts/Excalifont-Regular.woff2"),
     ...FontAwesome.font,
   });
 
@@ -50,7 +51,6 @@ export default function RootLayout() {
 }
 
 function RootLayoutNav() {
-
   return (
     <ThemeProvider value={DarkTheme}>
       <Stack screenOptions={{ headerShown: false }}>
