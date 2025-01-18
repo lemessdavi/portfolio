@@ -27,7 +27,6 @@ export default function TechCard(techCardProps: TechCardProps) {
 const styles = StyleSheet.create({
   techCard: {
     width: 300,
-
     borderRadius: 10,
     backgroundColor: "transparent",
     shadowColor: "#000",
@@ -39,27 +38,32 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
     flexDirection: "row",
-    justifyContent: "space-around",
+    marginHorizontal: 10,
+    overflow: "hidden",
+    padding: 10,
+    justifyContent: "flex-start",
   },
 
   icon: {
-    width: 100,
-    height: 100,
     backgroundColor: "transparent",
     margin: 10,
   },
 
   text: {
     backgroundColor: "transparent",
-    alignItems: "center",
+    alignItems: "flex-start",
     justifyContent: "center",
+    marginLeft: 10,
   },
+
   title: {
     fontSize: 20,
     marginBottom: 20,
     fontWeight: "bold",
     fontFamily: "Excalifont",
+
   },
+
   subtitle: {
     fontSize: 14,
     fontFamily: "Excalifont",

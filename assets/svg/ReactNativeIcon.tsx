@@ -1,6 +1,6 @@
 import * as React from "react";
 import Svg, { Path, SvgProps } from "react-native-svg";
-const ReactNativeIcon = (props : SvgProps) => (
+const ReactNativeIcon = (props: SvgProps) => (
   <Svg
     viewBox="0 0 256 228"
     width={256}
