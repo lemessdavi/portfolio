@@ -1,17 +1,18 @@
 import ReactNativeIcon from "@/assets/svg/ReactNativeIcon";
 import { Text, View } from "./Themed";
-import { StyleSheet } from "react-native";
+import { StyleProp, StyleSheet, ViewStyle } from "react-native";
 
 interface TechCardProps {
   icon: React.JSX.Element;
   title: string;
   subtitle: string;
+  style?: StyleProp<ViewStyle>;
 }
 
 export default function TechCard(techCardProps: TechCardProps) {
   return (
     <View
-      style={styles.techCard}
+      style={[styles.techCard, techCardProps.style]}
       onPointerEnter={() => console.log("enter")}
       onPointerLeave={() => console.log("leave")}
     >
@@ -38,7 +39,6 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
     flexDirection: "row",
-    marginHorizontal: 10,
     overflow: "hidden",
     padding: 10,
     justifyContent: "flex-start",
@@ -61,7 +61,6 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     fontWeight: "bold",
     fontFamily: "Excalifont",
-
   },
 
   subtitle: {
