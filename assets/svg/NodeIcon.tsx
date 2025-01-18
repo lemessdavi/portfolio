@@ -1,5 +1,13 @@
 import * as React from "react";
-import Svg, { Defs, LinearGradient, Stop, Path, Mask, Use, SvgProps } from "react-native-svg";
+import Svg, {
+  Defs,
+  LinearGradient,
+  Stop,
+  Path,
+  Mask,
+  Use,
+  SvgProps,
+} from "react-native-svg";
 const NodeIcon = (props: SvgProps) => (
   <Svg
     viewBox="0 0 256 292"
@@ -10,20 +18,38 @@ const NodeIcon = (props: SvgProps) => (
     {...props}
   >
     <Defs>
-      <LinearGradient id="a" x1="68.188%" x2="27.823%" y1="17.487%" y2="89.755%">
+      <LinearGradient
+        id="a"
+        x1="68.188%"
+        x2="27.823%"
+        y1="17.487%"
+        y2="89.755%"
+      >
         <Stop offset="0%" stopColor="#41873F" />
         <Stop offset="32.88%" stopColor="#418B3D" />
         <Stop offset="63.52%" stopColor="#419637" />
         <Stop offset="93.19%" stopColor="#3FA92D" />
         <Stop offset="100%" stopColor="#3FAE2A" />
       </LinearGradient>
-      <LinearGradient id="c" x1="43.277%" x2="159.245%" y1="55.169%" y2="-18.306%">
+      <LinearGradient
+        id="c"
+        x1="43.277%"
+        x2="159.245%"
+        y1="55.169%"
+        y2="-18.306%"
+      >
         <Stop offset="13.76%" stopColor="#41873F" />
         <Stop offset="40.32%" stopColor="#54A044" />
         <Stop offset="71.36%" stopColor="#66B848" />
         <Stop offset="90.81%" stopColor="#6CC04A" />
       </LinearGradient>
-      <LinearGradient id="f" x1="-4.389%" x2="101.499%" y1="49.997%" y2="49.997%">
+      <LinearGradient
+        id="f"
+        x1="-4.389%"
+        x2="101.499%"
+        y1="49.997%"
+        y2="49.997%"
+      >
         <Stop offset="9.192%" stopColor="#6CC04A" />
         <Stop offset="28.64%" stopColor="#66B848" />
         <Stop offset="59.68%" stopColor="#54A044" />

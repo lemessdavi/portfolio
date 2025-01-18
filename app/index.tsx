@@ -11,7 +11,11 @@ export default function TabOneScreen() {
   const ICON_SIZE = 60;
 
   return (
-    <View style={styles.container} lightColor="#eee" darkColor="rgba(255,255,255,0.1)">
+    <View
+      style={styles.container}
+      lightColor="#eee"
+      darkColor="rgba(255,255,255,0.1)"
+    >
       <View style={styles.textContainer}>
         <Text style={styles.title}>I'm Davi Lemes</Text>
         <Text style={styles.subtitle}>A Mobile Software Engineer</Text>
@@ -26,7 +30,11 @@ export default function TabOneScreen() {
             subtitle="Better then Flutter"
             style={{ marginRight: 20 }}
           />
-          <TechCard icon={<ExpoIcon width={ICON_SIZE} height={ICON_SIZE} />} title="Expo" subtitle="To do everything" />
+          <TechCard
+            icon={<ExpoIcon width={ICON_SIZE} height={ICON_SIZE} />}
+            title="Expo"
+            subtitle="To do everything"
+          />
         </View>
         <View style={styles.horitonalContainer}>
           <TechCard

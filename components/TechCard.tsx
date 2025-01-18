@@ -1,6 +1,7 @@
 import ReactNativeIcon from "@/assets/svg/ReactNativeIcon";
 import { Text, View } from "./Themed";
-import { StyleProp, StyleSheet, ViewStyle } from "react-native";
+import { Animated, Pressable, StyleProp, StyleSheet, ViewStyle } from "react-native";
+import { useRef } from "react";
 
 interface TechCardProps {
   icon: React.JSX.Element;
@@ -10,18 +11,56 @@ interface TechCardProps {
 }
 
 export default function TechCard(techCardProps: TechCardProps) {
+  const scale = useRef(new Animated.Value(1)).current;
+  const rotateAnim = useRef(new Animated.Value(0)).current;
+
+  const handleHoverIn = () => {
+    //Card
+    Animated.spring(scale, {
+      toValue: 1.05,
+      useNativeDriver: true,
+    }).start();
+
+    //Icon
+    Animated.timing(rotateAnim, {
+      toValue: 1,
+      duration: 2500,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  const handleHoverOut = () => {
+    //Card
+    Animated.spring(scale, {
+      toValue: 1,
+      useNativeDriver: true,
+    }).start();
+
+    //Icon
+    Animated.timing(rotateAnim, {
+      toValue: 0,
+      duration: 1000,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  const rotate = rotateAnim.interpolate({
+    inputRange: [0, 1],
+    outputRange: ["0deg", "360deg"],
+  });
+
   return (
-    <View
-      style={[styles.techCard, techCardProps.style]}
-      onPointerEnter={() => console.log("enter")}
-      onPointerLeave={() => console.log("leave")}
-    >
-      <View style={styles.icon}>{techCardProps.icon}</View>
-      <View style={styles.text}>
-        <Text style={styles.title}>{techCardProps.title}</Text>
-        <Text style={styles.subtitle}>{techCardProps.subtitle}</Text>
-      </View>
-    </View>
+    <Pressable onHoverIn={handleHoverIn} onHoverOut={handleHoverOut}>
+      <Animated.View style={[styles.techCard, techCardProps.style, { transform: [{ scale }] }]}>
+        <Animated.View style={{ transform: [{ rotate }] }}>
+          <View style={styles.icon}>{techCardProps.icon}</View>
+        </Animated.View>
+        <View style={styles.text}>
+          <Text style={styles.title}>{techCardProps.title}</Text>
+          <Text style={styles.subtitle}>{techCardProps.subtitle}</Text>
+        </View>
+      </Animated.View>
+    </Pressable>
   );
 }
 
