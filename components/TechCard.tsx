@@ -29,7 +29,7 @@ export default function TechCard(techCardProps: TechCardProps) {
     //Icon
     Animated.timing(rotateAnim, {
       toValue: 1,
-      duration: 2500,
+      duration: 1000,
       useNativeDriver: true,
     }).start();
   };

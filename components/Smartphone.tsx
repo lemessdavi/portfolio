@@ -1,18 +1,36 @@
 import App from "@/components/App";
 import LinkedinIcon from "@/assets/svg/LinkedinIcon";
 import SmartphoneSVG from "@/assets/svg/SmartphoneSVG";
-import React from "react";
-import { View, StyleSheet } from "react-native";
+import React, { useEffect, useRef, useState } from "react";
+import { View, StyleSheet, Animated, Easing } from "react-native";
 import GmailIcon from "@/assets/svg/GmailIcon";
 import WhatsappIcon from "@/assets/svg/Whatsapp";
 import GithubIcon from "@/assets/svg/GithubIcon";
 import DailyDevIcon from "@/assets/svg/DailyDevIcon";
 import ExpoIcon from "@/assets/svg/ExpoIcon";
+import BirdIcon from "@/assets/svg/Bird";
+import AppleIcon from "@/assets/svg/AppleIcon";
 
 export default function Smartphone() {
+  const showScreenAnim = useRef(new Animated.Value(0)).current;
+  const translateY = useRef(new Animated.Value(-50)).current;
+
   const PHONE_WIDTH = 400;
   const PHONE_HEIGHT = 800;
   const ICON_SIZE = 50;
+
+  const afterLoadAnimation = Animated.parallel([
+    Animated.timing(showScreenAnim, {
+      toValue: 1,
+      duration: 1000,
+      useNativeDriver: true,
+    }),
+    Animated.timing(translateY, {
+      toValue: 0,
+      duration: 1000,
+      useNativeDriver: true,
+    }),
+  ]);
 
   const styles = StyleSheet.create({
     container: {
@@ -26,6 +44,7 @@ export default function Smartphone() {
       height: PHONE_HEIGHT,
       padding: 30,
       paddingTop: 100,
+      overflow: "hidden",
     },
     appRow: {
       flexDirection: "row",
@@ -33,51 +52,29 @@ export default function Smartphone() {
       alignItems: "center",
       flexWrap: "wrap",
       marginBottom: 30,
+      overflow: "hidden",
     },
   });
 
   return (
     <View style={styles.container}>
-      <SmartphoneSVG PHONE_WIDTH={PHONE_WIDTH} PHONE_HEIGHT={PHONE_HEIGHT} />
-
-      <View style={styles.appsContainer}>
-        <View style={styles.appRow}>
-          <App
-            icon={<LinkedinIcon width={ICON_SIZE} height={ICON_SIZE} />}
-            title="Linkedin"
-          />
-          <App
-            icon={<GmailIcon width={ICON_SIZE} height={ICON_SIZE} />}
-            title="Gmail"
-          />
-          <App
-            icon={<WhatsappIcon width={ICON_SIZE} height={ICON_SIZE} />}
-            title="Whatsapp"
-          />
-          <App
-            icon={<GithubIcon width={ICON_SIZE} height={ICON_SIZE} />}
-            title="Github"
-          />
-        </View>
-        <View style={styles.appRow}>
-          <App
-            icon={<DailyDevIcon width={ICON_SIZE} height={ICON_SIZE} />}
-            title="daily.dev"
-          />
-          <App
-            icon={<ExpoIcon width={ICON_SIZE} height={ICON_SIZE} />}
-            title="Project"
-          />
-          <App
-            icon={<ExpoIcon width={ICON_SIZE} height={ICON_SIZE} />}
-            title="Flappy"
-          />
-          <App
-            icon={<ExpoIcon width={ICON_SIZE} height={ICON_SIZE} />}
-            title="somthing"
-          />
-        </View>
+      <View>
+        <SmartphoneSVG PHONE_WIDTH={PHONE_WIDTH} PHONE_HEIGHT={PHONE_HEIGHT} afterLoadAnimation={afterLoadAnimation} />
       </View>
+      <Animated.View style={[styles.appsContainer, { opacity: showScreenAnim }, { transform: [{ translateY }] }]}>
+        <View style={styles.appRow}>
+          <App icon={<LinkedinIcon width={ICON_SIZE} height={ICON_SIZE} />} title="Linkedin" />
+          <App icon={<GmailIcon width={ICON_SIZE} height={ICON_SIZE} />} title="Gmail" />
+          <App icon={<WhatsappIcon width={ICON_SIZE} height={ICON_SIZE} />} title="Whatsapp" />
+          <App icon={<GithubIcon width={ICON_SIZE} height={ICON_SIZE} />} title="Github" />
+        </View>
+        <View style={styles.appRow}>
+          <App icon={<DailyDevIcon width={ICON_SIZE} height={ICON_SIZE} />} title="daily.dev" />
+          <App icon={<ExpoIcon width={ICON_SIZE} height={ICON_SIZE} />} title="Project" />
+          <App icon={<BirdIcon width={ICON_SIZE} height={ICON_SIZE} />} title="Flappy" />
+          <App icon={<AppleIcon fill={"#fff"} width={ICON_SIZE} height={ICON_SIZE} />} title="somthing" />
+        </View>
+      </Animated.View>
     </View>
   );
 }

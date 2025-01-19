@@ -35,19 +35,11 @@ export default function TabOneScreen() {
         ]}
       >
         <View style={styles.textContainer}>
-          <Text style={[styles.title, { fontSize: isSmallScreen ? 40 : 60 }]}>
-            I'm Davi Lemes
-          </Text>
-          <Text
-            style={[styles.subtitle, { fontSize: isSmallScreen ? 24 : 30 }]}
-          >
+          <Text style={[styles.title, { fontSize: isSmallScreen ? 40 : 60 }]}>I'm Davi Lemes</Text>
+          <Text style={[styles.subtitle, { fontSize: isSmallScreen ? 24 : 30 }]}>
             A Mobile <Text style={styles.highlighted}>Software Engineer</Text>
           </Text>
-          <Text
-            style={[styles.locationText, { fontSize: isSmallScreen ? 20 : 24 }]}
-          >
-            📍 Latin America, Brazil
-          </Text>
+          <Text style={[styles.locationText, { fontSize: isSmallScreen ? 20 : 24 }]}>📍 Latin America, Brazil</Text>
         </View>
 
         <View style={styles.techStackContainer}>
@@ -78,6 +70,17 @@ export default function TabOneScreen() {
             />
           </View>
         </View>
+
+        <View style={styles.statsContainer}>
+          <View style={styles.statBlock}>
+            <Text style={[styles.statsNumber, { fontSize: isSmallScreen ? 40 : 60 }]}>+4.5</Text>
+            <Text style={[styles.statsText]}>Years of Experience</Text>
+          </View>
+          <View style={styles.statBlock}>
+            <Text style={[styles.statsNumber, { fontSize: isSmallScreen ? 40 : 60 }]}>+20</Text>
+            <Text style={[styles.statsText]}>Apps Published</Text>
+          </View>
+        </View>
       </View>
 
       <View style={styles.rightContainer}>
@@ -93,9 +96,11 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   leftContainer: {
+    height: "80%",
     backgroundColor: "transparent",
     alignSelf: "center",
     alignItems: "center",
+    justifyContent: "space-around",
   },
   rightContainer: {
     width: "50%",
@@ -118,6 +123,35 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
     alignSelf: "flex-start",
   },
+  statsContainer: {
+    flexDirection: "row",
+    backgroundColor: "transparent",
+    alignSelf: "flex-start",
+    alignItems: "center",
+    justifyContent: "space-evenly",
+  },
+  statBlock: {
+    flexDirection: "row",
+    backgroundColor: "transparent",
+    alignSelf: "flex-start",
+    alignItems: "center",
+  },
+
+  statsNumber: {
+    fontFamily: "SpaceMono",
+    marginBottom: 10,
+    flex: 4,
+  },
+  statsText: {
+    fontFamily: "SpaceMono",
+    fontSize: 20,
+    textOverflow: "ellipsis",
+    alignContent: "center",
+    alignSelf: "center",
+    marginLeft: 10,
+    flex: 6,
+  },
+
   title: {
     fontWeight: "bold",
     fontFamily: "Excalifont",
