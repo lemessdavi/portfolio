@@ -1,6 +1,11 @@
-import ReactNativeIcon from "@/assets/svg/ReactNativeIcon";
 import { Text, View } from "./Themed";
-import { Animated, Pressable, StyleProp, StyleSheet, ViewStyle } from "react-native";
+import {
+  Animated,
+  Pressable,
+  StyleProp,
+  StyleSheet,
+  ViewStyle,
+} from "react-native";
 import { useRef } from "react";
 
 interface TechCardProps {
@@ -51,7 +56,13 @@ export default function TechCard(techCardProps: TechCardProps) {
 
   return (
     <Pressable onHoverIn={handleHoverIn} onHoverOut={handleHoverOut}>
-      <Animated.View style={[styles.techCard, techCardProps.style, { transform: [{ scale }] }]}>
+      <Animated.View
+        style={[
+          styles.techCard,
+          techCardProps.style,
+          { transform: [{ scale }] },
+        ]}
+      >
         <Animated.View style={{ transform: [{ rotate }] }}>
           <View style={styles.icon}>{techCardProps.icon}</View>
         </Animated.View>
