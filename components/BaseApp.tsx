@@ -1,13 +1,20 @@
 import { Animated, Pressable, StyleSheet } from "react-native";
-import { Text, View } from "./Themed";
+import { View } from "./Themed";
 import { useRef } from "react";
-import { BaseAppProps } from "./BaseApp";
 
-interface AppProps extends Omit<BaseAppProps, "children"> {
-  title: string;
+export interface BaseAppProps {
+  icon: React.JSX.Element;
+  iconSize: number;
+  children?: React.ReactNode;
+  onClick?: VoidFunction;
 }
 
-export default function App({ icon, title, iconSize }: AppProps) {
+export default function BaseApp({
+  icon,
+  iconSize,
+  children,
+  onClick,
+}: BaseAppProps) {
   const scaleIcon = useRef(new Animated.Value(1)).current;
   const scaleText = useRef(new Animated.Value(1)).current;
 
@@ -45,7 +52,7 @@ export default function App({ icon, title, iconSize }: AppProps) {
       maxHeight: 100,
     },
     icon: {
-      backgroundColor: "rgba(255, 255, 255, 0.1)",
+      backgroundColor: "transparent",
       borderRadius: 20,
       width: iconSize + 20,
       height: iconSize + 20,
@@ -53,21 +60,20 @@ export default function App({ icon, title, iconSize }: AppProps) {
       justifyContent: "center",
       alignSelf: "center",
     },
-    title: {
-      fontSize: 12,
-      marginTop: 8,
-      alignSelf: "center",
-    },
   });
 
   return (
-    <Pressable onHoverIn={handleHoverIn} onHoverOut={handleHoverOut}>
+    <Pressable
+      onHoverIn={handleHoverIn}
+      onHoverOut={handleHoverOut}
+      onPress={onClick}
+    >
       <View style={styles.container}>
         <Animated.View style={[{ transform: [{ scale: scaleIcon }] }]}>
           <View style={styles.icon}>{icon}</View>
         </Animated.View>
         <Animated.View style={[{ transform: [{ scale: scaleText }] }]}>
-          <Text style={styles.title}>{title}</Text>
+          {children}
         </Animated.View>
       </View>
     </Pressable>
