@@ -105,6 +105,7 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     padding: 10,
     justifyContent: "flex-start",
+    marginVertical: 10,
   },
   gradient: {
     position: "absolute",
