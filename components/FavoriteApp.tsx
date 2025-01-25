@@ -4,12 +4,17 @@ export interface FavoriteApp {
   icon: React.JSX.Element;
   title: string;
   iconSize: number;
+  onPress?: VoidFunction;
 }
 
 interface FavoriteAppProps extends Omit<BaseAppProps, "children"> {
   title: string;
 }
 
-export default function FavoriteApp({ icon, iconSize }: FavoriteAppProps) {
-  return <BaseApp icon={icon} iconSize={iconSize} />;
+export default function FavoriteApp({
+  icon,
+  iconSize,
+  onPress,
+}: FavoriteAppProps) {
+  return <BaseApp icon={icon} iconSize={iconSize} onPress={onPress} />;
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { Linking, StyleSheet, View } from "react-native";
 import FavoriteApp from "./FavoriteApp";
 import LinkedinIcon from "@/assets/svg/LinkedinIcon";
 import GmailIcon from "@/assets/svg/GmailIcon";
@@ -34,21 +34,33 @@ export default function FavoriteBar({ ICON_SIZE }: FavoriteBarProps) {
         icon={<LinkedinIcon width={ICON_SIZE} height={ICON_SIZE} />}
         title="Linkedin"
         iconSize={ICON_SIZE}
+        onPress={() => {
+          Linking.openURL("https://www.linkedin.com/in/lemessdavi/");
+        }}
       />
       <FavoriteApp
         icon={<GmailIcon width={ICON_SIZE} height={ICON_SIZE} />}
         title="Gmail"
         iconSize={ICON_SIZE}
+        onPress={() => {
+          Linking.openURL("mailto:contact@lemessdavi.com");
+        }}
       />
       <FavoriteApp
         icon={<WhatsappIcon width={ICON_SIZE} height={ICON_SIZE} />}
         title="Whatsapp"
         iconSize={ICON_SIZE}
+        onPress={() => {
+          Linking.openURL("https://wa.me/5548991313199");
+        }}
       />
       <FavoriteApp
         icon={<GithubIcon width={ICON_SIZE} height={ICON_SIZE} />}
         title="Github"
         iconSize={ICON_SIZE}
+        onPress={() => {
+          Linking.openURL("https://github.com/lemessdavi");
+        }}
       />
     </View>
   );

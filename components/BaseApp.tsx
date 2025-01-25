@@ -1,4 +1,10 @@
-import { Animated, Pressable, StyleSheet } from "react-native";
+import {
+  Animated,
+  Pressable,
+  StyleProp,
+  StyleSheet,
+  ViewStyle,
+} from "react-native";
 import { View } from "./Themed";
 import { useRef } from "react";
 
@@ -6,14 +12,16 @@ export interface BaseAppProps {
   icon: React.JSX.Element;
   iconSize: number;
   children?: React.ReactNode;
-  onClick?: VoidFunction;
+  onPress?: VoidFunction;
+  iconStyle?: StyleProp<ViewStyle>;
 }
 
 export default function BaseApp({
   icon,
   iconSize,
   children,
-  onClick,
+  onPress,
+  iconStyle,
 }: BaseAppProps) {
   const scaleIcon = useRef(new Animated.Value(1)).current;
   const scaleText = useRef(new Animated.Value(1)).current;
@@ -66,11 +74,11 @@ export default function BaseApp({
     <Pressable
       onHoverIn={handleHoverIn}
       onHoverOut={handleHoverOut}
-      onPress={onClick}
+      onPress={onPress}
     >
       <View style={styles.container}>
         <Animated.View style={[{ transform: [{ scale: scaleIcon }] }]}>
-          <View style={styles.icon}>{icon}</View>
+          <View style={[styles.icon, iconStyle]}>{icon}</View>
         </Animated.View>
         <Animated.View style={[{ transform: [{ scale: scaleText }] }]}>
           {children}
