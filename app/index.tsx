@@ -63,11 +63,19 @@ export default function TabOneScreen() {
                 title="React Native"
                 subtitle="Better than Flutter"
                 style={{ marginRight: 10 }}
+                gradientColors={[
+                  "rgba(97, 218, 251, 0.15)",
+                  "rgba(97, 218, 251, 0.05)",
+                ]}
               />
               <TechCard
                 icon={<ExpoIcon width={ICON_SIZE} height={ICON_SIZE} />}
                 title="Expo"
                 subtitle="To do everything"
+                gradientColors={[
+                  "rgba(255, 255, 255, 0.15)",
+                  "rgba(255, 255, 255, 0.05)",
+                ]}
               />
             </View>
             <View style={styles.horitonalContainer}>
@@ -76,11 +84,19 @@ export default function TabOneScreen() {
                 title="TypeScript"
                 subtitle="To fill it with any"
                 style={{ marginRight: 10 }}
+                gradientColors={[
+                  "rgba(49, 120, 198, 0.15)",
+                  "rgba(49, 120, 198, 0.05)",
+                ]}
               />
               <TechCard
                 icon={<NodeIcon width={ICON_SIZE} height={ICON_SIZE} />}
                 title="Node.js"
                 subtitle="JS on the server 😈"
+                gradientColors={[
+                  "rgba(83, 158, 67, 0.15)",
+                  "rgba(83, 158, 67, 0.05)",
+                ]}
               />
             </View>
           </View>

@@ -6,6 +6,7 @@ import {
   StyleSheet,
   ViewStyle,
 } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
 import { useRef } from "react";
 
 interface TechCardProps {
@@ -13,9 +14,16 @@ interface TechCardProps {
   title: string;
   subtitle: string;
   style?: StyleProp<ViewStyle>;
+  gradientColors?: string[];
 }
 
-export default function TechCard(techCardProps: TechCardProps) {
+export default function TechCard({
+  icon,
+  title,
+  subtitle,
+  style,
+  gradientColors = ["rgba(0, 216, 255, 0.15)", "rgba(0, 216, 255, 0.05)"],
+}: TechCardProps) {
   const scale = useRef(new Animated.Value(1)).current;
   const rotateAnim = useRef(new Animated.Value(0)).current;
 
@@ -57,24 +65,29 @@ export default function TechCard(techCardProps: TechCardProps) {
   return (
     <Pressable onHoverIn={handleHoverIn} onHoverOut={handleHoverOut}>
       <Animated.View
-        style={[
-          styles.techCard,
-          techCardProps.style,
-          { transform: [{ scale }] },
-        ]}
+        style={[styles.techCard, style, { transform: [{ scale }] }]}
       >
+        <LinearGradient
+          colors={
+            gradientColors.length === 2
+              ? (gradientColors as [string, string])
+              : ["rgba(0, 216, 255, 0.15)", "rgba(0, 216, 255, 0.05)"]
+          }
+          style={styles.gradient}
+          start={{ x: 1, y: 1 }}
+          end={{ x: 0, y: 0 }}
+        />
         <Animated.View style={{ transform: [{ rotate }] }}>
-          <View style={styles.icon}>{techCardProps.icon}</View>
+          <View style={styles.icon}>{icon}</View>
         </Animated.View>
         <View style={styles.text}>
-          <Text style={styles.title}>{techCardProps.title}</Text>
-          <Text style={styles.subtitle}>{techCardProps.subtitle}</Text>
+          <Text style={styles.title}>{title}</Text>
+          <Text style={styles.subtitle}>{subtitle}</Text>
         </View>
       </Animated.View>
     </Pressable>
   );
 }
-
 const styles = StyleSheet.create({
   techCard: {
     width: 300,
@@ -92,6 +105,13 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     padding: 10,
     justifyContent: "flex-start",
+  },
+  gradient: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
   },
 
   icon: {
