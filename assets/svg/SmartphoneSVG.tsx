@@ -1,7 +1,6 @@
-import React from "react";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Animated, StyleSheet } from "react-native";
-import Svg, { Rect } from "react-native-svg";
+import Svg, { Rect, Defs, LinearGradient, Stop } from "react-native-svg";
 import AppleIcon from "./AppleIcon";
 import { Text, View } from "@/components/Themed";
 
@@ -9,10 +8,15 @@ interface SmartphoneSVGProps {
   PHONE_WIDTH: number;
   PHONE_HEIGHT: number;
   afterLoadAnimation?: Animated.CompositeAnimation;
+  isPowerOn: boolean;
 }
 
-export default function SmartphoneSVG({ PHONE_WIDTH, PHONE_HEIGHT, afterLoadAnimation }: SmartphoneSVGProps) {
-  const [loading, setLoading] = useState(true);
+export default function SmartphoneSVG({
+  PHONE_WIDTH,
+  PHONE_HEIGHT,
+  afterLoadAnimation,
+  isPowerOn,
+}: SmartphoneSVGProps) {
   const loadingAnim = useRef(new Animated.Value(0)).current;
   const helloAnim = useRef(new Animated.Value(0)).current;
 
@@ -21,17 +25,10 @@ export default function SmartphoneSVG({ PHONE_WIDTH, PHONE_HEIGHT, afterLoadAnim
   const borderWidth = PHONE_WIDTH - 2 * borderMarginWidth;
   const borderHeight = PHONE_HEIGHT - 2 * borderMarginHeight;
   const borderRadius = PHONE_WIDTH * 0.1333;
-
-  const screenMarginWidth = PHONE_WIDTH * 0.1;
-  const screenMarginHeight = PHONE_HEIGHT * 0.1;
-  const screenWidth = PHONE_WIDTH - 2 * screenMarginWidth;
-  const screenHeight = PHONE_HEIGHT - 2 * screenMarginHeight;
-  const screenBorderRadius = PHONE_WIDTH * 0.0667;
-
-
+  const strokeWidth = 2;
 
   const styles = StyleSheet.create({
-    container:{
+    container: {
       width: PHONE_WIDTH,
       height: PHONE_HEIGHT,
       backgroundColor: "transparent",
@@ -44,49 +41,90 @@ export default function SmartphoneSVG({ PHONE_WIDTH, PHONE_HEIGHT, afterLoadAnim
       height: PHONE_HEIGHT,
       zIndex: 1,
     },
+    border: {
+      position: "absolute",
+      width: borderWidth,
+      height: borderHeight,
+      shadowColor: "#fc0000",
+      shadowOffset: {
+        width: 6,
+        height: 2,
+      },
+      shadowRadius: 999,
+    },
   });
 
   useEffect(() => {
-    Animated.sequence([
-      Animated.timing(loadingAnim, {
-        toValue: 1,
-        duration: 4000,
-        useNativeDriver: true,
-      }),
-      Animated.timing(loadingAnim, {
-        toValue: 0,
-        duration: 2000,
-        useNativeDriver: true,
-      }),
-      Animated.timing(helloAnim, {
-        toValue: 1,
-        duration: 4000,
-        useNativeDriver: true,
-      }),
-      Animated.timing(helloAnim, {
-        toValue: 0,
-        duration: 2000,
-        useNativeDriver: true,
-      }),
-      afterLoadAnimation || Animated.timing(new Animated.Value(0), { toValue: 0, duration: 0, useNativeDriver: true }),
-    ]).start();
+    if (!isPowerOn) {
+      Animated.sequence([
+        Animated.timing(loadingAnim, {
+          toValue: 1,
+          duration: 4000,
+          useNativeDriver: true,
+        }),
+        Animated.timing(loadingAnim, {
+          toValue: 0,
+          duration: 2000,
+          useNativeDriver: true,
+        }),
+        Animated.timing(helloAnim, {
+          toValue: 1,
+          duration: 4000,
+          useNativeDriver: true,
+        }),
+        Animated.timing(helloAnim, {
+          toValue: 0,
+          duration: 2000,
+          useNativeDriver: true,
+        }),
+        afterLoadAnimation ||
+          Animated.timing(new Animated.Value(0), { toValue: 0, duration: 0, useNativeDriver: true }),
+      ]).start();
+    }
+  }, [loadingAnim, helloAnim, afterLoadAnimation, isPowerOn]);
 
-    
-  }, [loadingAnim, helloAnim]);
+  const notchWidth = borderWidth * 0.3;
+  const notchHeight = borderHeight * 0.05;
+  const notchX = (PHONE_WIDTH - notchWidth) / 2;
+  const notchY = borderMarginHeight;
+
+  const backgroundX = borderMarginWidth + strokeWidth;
+  const backgroundY = borderMarginHeight + strokeWidth;
+  const backgroundWidth = borderWidth - 2 * strokeWidth;
+  const backgroundHeight = borderHeight - 2 * strokeWidth;
+  const backgroundRadius = borderRadius - strokeWidth; // Adjust radius to fit inside the border
 
   return (
     <View style={styles.container}>
-        <>
-          <Animated.View style={[styles.loadingContainer, { opacity: loadingAnim }]}>
-            <AppleIcon fill={"#fff"} width={100} height={100} />
-          </Animated.View>
-          <Animated.View style={[styles.loadingContainer, { opacity: helloAnim }]}>
-            <Text style={{ fontSize: 40, fontWeight: "bold", color: "#fff" }}>Hello</Text>
-          </Animated.View>
-        </>
-     
-        <Svg width={PHONE_WIDTH} height={PHONE_HEIGHT}>
-          {/* Smartphone Border */}
+      <>
+        <Animated.View style={[styles.loadingContainer, { opacity: loadingAnim }]}>
+          <AppleIcon fill={"#fff"} width={100} height={100} />
+        </Animated.View>
+        <Animated.View style={[styles.loadingContainer, { opacity: helloAnim }]}>
+          <Text style={{ fontSize: 40, fontWeight: "bold", color: "#fff" }}>Hello</Text>
+        </Animated.View>
+      </>
+
+      <Svg width={PHONE_WIDTH} height={PHONE_HEIGHT}>
+        <Defs>
+          <LinearGradient id="phoneGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <Stop offset="0%" stopColor="#4c669f" stopOpacity="1" />
+            <Stop offset="100%" stopColor="#7c983b" stopOpacity="1" />
+          </LinearGradient>
+        </Defs>
+
+        <Rect
+          x={backgroundX}
+          y={backgroundY}
+          width={backgroundWidth}
+          height={backgroundHeight}
+          rx={backgroundRadius}
+          ry={backgroundRadius}
+          fill="url(#phoneGradient)"
+        />
+
+        <View style={styles.border}>
+          {/* Border */}
           <Rect
             x={borderMarginWidth}
             y={borderMarginHeight}
@@ -94,23 +132,23 @@ export default function SmartphoneSVG({ PHONE_WIDTH, PHONE_HEIGHT, afterLoadAnim
             height={borderHeight}
             rx={borderRadius}
             ry={borderRadius}
-            fill="#000"
+            fill={isPowerOn ? "transparent" : "#000"}
             stroke="#333"
-            strokeWidth={2}
+            strokeWidth={strokeWidth}
           />
-          {/* Screen */}
-          <Rect
-            x={screenMarginWidth}
-            y={screenMarginHeight}
-            width={screenWidth}
-            height={screenHeight}
-            rx={screenBorderRadius}
-            ry={screenBorderRadius}
-            fill="transparent"
-          />
-        </Svg>
+        </View>
 
-      ;
+        {/* Notch */}
+        <Rect
+          x={notchX}
+          y={notchY - 2}
+          width={notchWidth}
+          height={notchHeight}
+          rx={notchHeight / 2}
+          ry={notchHeight / 2}
+          fill="#333"
+        />
+      </Svg>
     </View>
   );
 }

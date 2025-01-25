@@ -5,9 +5,10 @@ import { useRef } from "react";
 export interface AppProps {
   icon: React.JSX.Element;
   title: string;
+  iconSize: number;
 }
 
-export default function App({ icon, title }: AppProps) {
+export default function App({ icon, title, iconSize }: AppProps) {
   const scaleIcon = useRef(new Animated.Value(1)).current;
   const scaleText = useRef(new Animated.Value(1)).current;
 
@@ -36,6 +37,30 @@ export default function App({ icon, title }: AppProps) {
     }).start();
   };
 
+  const styles = StyleSheet.create({
+    container: {
+      backgroundColor: "transparent",
+      alignItems: "center",
+      justifyContent: "center",
+      maxWidth: 60,
+      maxHeight: 100,
+    },
+    icon: {
+      backgroundColor: "rgba(255, 255, 255, 0.1)",
+      borderRadius: 20,
+      width: iconSize + 20,
+      height: iconSize + 20,
+      alignItems: "center",
+      justifyContent: "center",
+      alignSelf: "center",
+    },
+    title: {
+      fontSize: 12,
+      marginTop: 8,
+      alignSelf: "center",
+    },
+  });
+
   return (
     <Pressable onHoverIn={handleHoverIn} onHoverOut={handleHoverOut}>
       <View style={styles.container}>
@@ -49,27 +74,3 @@ export default function App({ icon, title }: AppProps) {
     </Pressable>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "transparent",
-    alignItems: "center",
-    justifyContent: "center",
-    maxWidth: 1,
-    maxHeight: 100,
-  },
-  icon: {
-    backgroundColor: "transparent",
-    width: 60,
-    height: 60,
-    alignItems: "center",
-    justifyContent: "center",
-    alignSelf: "center",
-  },
-
-  title: {
-    fontSize: 14,
-    marginTop: 10,
-    alignSelf: "center",
-  },
-});
