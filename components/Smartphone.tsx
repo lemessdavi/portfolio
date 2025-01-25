@@ -63,7 +63,6 @@ export default function Smartphone() {
       alignItems: "center",
       flexWrap: "wrap",
       marginBottom: 30,
-
     },
   });
 
@@ -77,19 +76,55 @@ export default function Smartphone() {
           isPowerOn={isPowerOn}
         />
       </View>
-      <Animated.View style={[styles.appsContainer, { opacity: showScreenAnim }, { transform: [{ translateY }] }]}>
+      <Animated.View
+        style={[
+          styles.appsContainer,
+          { opacity: showScreenAnim },
+          { transform: [{ translateY }] },
+        ]}
+      >
         <View style={styles.appRow}>
-          <App icon={<LinkedinIcon width={ICON_SIZE} height={ICON_SIZE} />} title="Linkedin" iconSize={ICON_SIZE} />
-          <App icon={<GmailIcon width={ICON_SIZE} height={ICON_SIZE} />} title="Gmail" iconSize={ICON_SIZE} />
-          <App icon={<WhatsappIcon width={ICON_SIZE} height={ICON_SIZE} />} title="Whatsapp" iconSize={ICON_SIZE} />
-          <App icon={<GithubIcon width={ICON_SIZE} height={ICON_SIZE} />} title="Github" iconSize={ICON_SIZE} />
+          <App
+            icon={<LinkedinIcon width={ICON_SIZE} height={ICON_SIZE} />}
+            title="Linkedin"
+            iconSize={ICON_SIZE}
+          />
+          <App
+            icon={<GmailIcon width={ICON_SIZE} height={ICON_SIZE} />}
+            title="Gmail"
+            iconSize={ICON_SIZE}
+          />
+          <App
+            icon={<WhatsappIcon width={ICON_SIZE} height={ICON_SIZE} />}
+            title="Whatsapp"
+            iconSize={ICON_SIZE}
+          />
+          <App
+            icon={<GithubIcon width={ICON_SIZE} height={ICON_SIZE} />}
+            title="Github"
+            iconSize={ICON_SIZE}
+          />
         </View>
         <View style={styles.appRow}>
-          <App icon={<DailyDevIcon width={ICON_SIZE} height={ICON_SIZE} />} title="daily.dev" iconSize={ICON_SIZE} />
-          <App icon={<ExpoIcon width={ICON_SIZE} height={ICON_SIZE} />} title="Project" iconSize={ICON_SIZE} />
-          <App icon={<AppleIcon width={ICON_SIZE} height={ICON_SIZE} />} title="Something" iconSize={ICON_SIZE} />
           <App
-            icon={<AppleIcon fill={"#fff"} width={ICON_SIZE} height={ICON_SIZE} />}
+            icon={<DailyDevIcon width={ICON_SIZE} height={ICON_SIZE} />}
+            title="daily.dev"
+            iconSize={ICON_SIZE}
+          />
+          <App
+            icon={<ExpoIcon width={ICON_SIZE} height={ICON_SIZE} />}
+            title="Project"
+            iconSize={ICON_SIZE}
+          />
+          <App
+            icon={<AppleIcon width={ICON_SIZE} height={ICON_SIZE} />}
+            title="Something"
+            iconSize={ICON_SIZE}
+          />
+          <App
+            icon={
+              <AppleIcon fill={"#fff"} width={ICON_SIZE} height={ICON_SIZE} />
+            }
             title="Something"
             iconSize={ICON_SIZE}
           />

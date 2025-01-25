@@ -78,7 +78,11 @@ export default function SmartphoneSVG({
           useNativeDriver: true,
         }),
         afterLoadAnimation ||
-          Animated.timing(new Animated.Value(0), { toValue: 0, duration: 0, useNativeDriver: true }),
+          Animated.timing(new Animated.Value(0), {
+            toValue: 0,
+            duration: 0,
+            useNativeDriver: true,
+          }),
       ]).start();
     }
   }, [loadingAnim, helloAnim, afterLoadAnimation, isPowerOn]);
@@ -97,11 +101,17 @@ export default function SmartphoneSVG({
   return (
     <View style={styles.container}>
       <>
-        <Animated.View style={[styles.loadingContainer, { opacity: loadingAnim }]}>
+        <Animated.View
+          style={[styles.loadingContainer, { opacity: loadingAnim }]}
+        >
           <AppleIcon fill={"#fff"} width={100} height={100} />
         </Animated.View>
-        <Animated.View style={[styles.loadingContainer, { opacity: helloAnim }]}>
-          <Text style={{ fontSize: 40, fontWeight: "bold", color: "#fff" }}>Hello</Text>
+        <Animated.View
+          style={[styles.loadingContainer, { opacity: helloAnim }]}
+        >
+          <Text style={{ fontSize: 40, fontWeight: "bold", color: "#fff" }}>
+            Hello
+          </Text>
         </Animated.View>
       </>
 
