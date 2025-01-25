@@ -7,6 +7,7 @@ import TypeScriptIcon from "@/assets/svg/TypeScriptIcon";
 import NodeIcon from "@/assets/svg/NodeIcon";
 import Smartphone from "@/components/Smartphone";
 import { useWindowDimensions } from "react-native";
+import SpaceBackground from "@/components/SpaceBackground";
 
 export default function TabOneScreen() {
   const { width } = useWindowDimensions();
@@ -14,108 +15,145 @@ export default function TabOneScreen() {
   const ICON_SIZE = isSmallScreen ? 40 : 60;
 
   return (
-    <View
-      style={[
-        styles.container,
-        {
-          flexDirection: isSmallScreen ? "column" : "row",
-          alignItems: "center",
-        },
-      ]}
-      lightColor="#eee"
-      darkColor="rgba(255,255,255,0.1)"
-    >
+    <View style={styles.mainContainer}>
+      <SpaceBackground />
       <View
         style={[
-          styles.leftContainer,
+          styles.container,
           {
-            width: isSmallScreen ? "100%" : "50%",
-            paddingLeft: isSmallScreen ? 20 : 100,
+            flexDirection: isSmallScreen ? "column" : "row",
+            alignItems: "center",
           },
         ]}
+        lightColor="transparent"
+        darkColor="transparent"
       >
-        <View style={styles.textContainer}>
-          <Text style={[styles.title, { fontSize: isSmallScreen ? 40 : 60 }]}>
-            I'm Davi Lemes
-          </Text>
-          <Text
-            style={[styles.subtitle, { fontSize: isSmallScreen ? 24 : 30 }]}
-          >
-            A Mobile <Text style={styles.highlighted}>Software Engineer</Text>
-          </Text>
-          <Text
-            style={[styles.locationText, { fontSize: isSmallScreen ? 20 : 24 }]}
-          >
-            📍 Latin America, Brazil
-          </Text>
-        </View>
-
-        <View style={styles.techStackContainer}>
-          <View style={styles.horitonalContainer}>
-            <TechCard
-              icon={<ReactNativeIcon width={ICON_SIZE} height={ICON_SIZE} />}
-              title="React Native"
-              subtitle="Better than Flutter"
-              style={{ marginRight: 10 }}
-            />
-            <TechCard
-              icon={<ExpoIcon width={ICON_SIZE} height={ICON_SIZE} />}
-              title="Expo"
-              subtitle="To do everything"
-            />
-          </View>
-          <View style={styles.horitonalContainer}>
-            <TechCard
-              icon={<TypeScriptIcon width={ICON_SIZE} height={ICON_SIZE} />}
-              title="TypeScript"
-              subtitle="To fill it with any"
-              style={{ marginRight: 10 }}
-            />
-            <TechCard
-              icon={<NodeIcon width={ICON_SIZE} height={ICON_SIZE} />}
-              title="Node.js"
-              subtitle="JS on the server 😈"
-            />
-          </View>
-        </View>
-
-        <View style={styles.statsContainer}>
-          <View style={styles.statBlock}>
+        <View
+          style={[
+            styles.leftContainer,
+            {
+              width: isSmallScreen ? "100%" : "50%",
+              paddingLeft: isSmallScreen ? 20 : 100,
+            },
+          ]}
+        >
+          <View style={styles.textContainer}>
+            <Text style={[styles.title, { fontSize: isSmallScreen ? 40 : 60 }]}>
+              I'm Davi Lemes
+            </Text>
+            <Text
+              style={[styles.subtitle, { fontSize: isSmallScreen ? 24 : 30 }]}
+            >
+              A Mobile <Text style={styles.highlighted}>Software Engineer</Text>
+            </Text>
             <Text
               style={[
-                styles.statsNumber,
-                { fontSize: isSmallScreen ? 40 : 60 },
+                styles.locationText,
+                { fontSize: isSmallScreen ? 20 : 24 },
               ]}
             >
-              +4.5
+              📍 Latin America, Brazil
             </Text>
-            <Text style={[styles.statsText]}>Years of Experience</Text>
           </View>
-          <View style={styles.statBlock}>
-            <Text
-              style={[
-                styles.statsNumber,
-                { fontSize: isSmallScreen ? 40 : 60 },
-              ]}
-            >
-              +20
-            </Text>
-            <Text style={[styles.statsText]}>Apps Published</Text>
+
+          <View style={styles.techStackContainer}>
+            <View style={styles.horitonalContainer}>
+              <TechCard
+                icon={<ReactNativeIcon width={ICON_SIZE} height={ICON_SIZE} />}
+                title="React Native"
+                subtitle="Better than Flutter"
+                style={{ marginRight: 10 }}
+              />
+              <TechCard
+                icon={<ExpoIcon width={ICON_SIZE} height={ICON_SIZE} />}
+                title="Expo"
+                subtitle="To do everything"
+              />
+            </View>
+            <View style={styles.horitonalContainer}>
+              <TechCard
+                icon={<TypeScriptIcon width={ICON_SIZE} height={ICON_SIZE} />}
+                title="TypeScript"
+                subtitle="To fill it with any"
+                style={{ marginRight: 10 }}
+              />
+              <TechCard
+                icon={<NodeIcon width={ICON_SIZE} height={ICON_SIZE} />}
+                title="Node.js"
+                subtitle="JS on the server 😈"
+              />
+            </View>
+          </View>
+
+          <View style={styles.statsContainer}>
+            <View style={styles.statBlock}>
+              <Text
+                style={[
+                  styles.statsNumber,
+                  { fontSize: isSmallScreen ? 40 : 60 },
+                ]}
+              >
+                +4.5
+              </Text>
+              <Text style={[styles.statsText]}>Years of Experience</Text>
+            </View>
+            <View style={styles.statBlock}>
+              <Text
+                style={[
+                  styles.statsNumber,
+                  { fontSize: isSmallScreen ? 40 : 60 },
+                ]}
+              >
+                +20
+              </Text>
+              <Text style={[styles.statsText]}>Apps Published</Text>
+            </View>
           </View>
         </View>
-      </View>
 
-      <View style={styles.rightContainer}>
-        <Smartphone />
+        <View style={styles.rightContainer}>
+          <Smartphone />
+        </View>
       </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  mainContainer: {
+    flex: 1,
+  },
   container: {
     flex: 1,
     justifyContent: "space-between",
+    backgroundColor: "transparent",
+  },
+  // Update text colors to be more visible on dark background
+  title: {
+    fontWeight: "bold",
+    fontFamily: "Excalifont",
+    color: "#fff",
+  },
+  subtitle: {
+    fontFamily: "Excalifont",
+    marginBottom: 10,
+    color: "#fff",
+  },
+  statsText: {
+    fontFamily: "SpaceMono",
+    fontSize: 20,
+    textOverflow: "ellipsis",
+    alignContent: "center",
+    alignSelf: "center",
+    marginLeft: 10,
+    flex: 6,
+    color: "#fff",
+  },
+  statsNumber: {
+    fontFamily: "SpaceMono",
+    marginBottom: 10,
+    flex: 4,
+    color: "#fff",
   },
   leftContainer: {
     height: "80%",
@@ -157,30 +195,6 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
     alignSelf: "flex-start",
     alignItems: "center",
-  },
-
-  statsNumber: {
-    fontFamily: "SpaceMono",
-    marginBottom: 10,
-    flex: 4,
-  },
-  statsText: {
-    fontFamily: "SpaceMono",
-    fontSize: 20,
-    textOverflow: "ellipsis",
-    alignContent: "center",
-    alignSelf: "center",
-    marginLeft: 10,
-    flex: 6,
-  },
-
-  title: {
-    fontWeight: "bold",
-    fontFamily: "Excalifont",
-  },
-  subtitle: {
-    fontFamily: "Excalifont",
-    marginBottom: 10,
   },
   highlighted: {
     color: "#00D8FF",
