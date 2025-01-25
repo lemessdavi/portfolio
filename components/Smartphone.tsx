@@ -2,19 +2,30 @@ import App from "@/components/App";
 import LinkedinIcon from "@/assets/svg/LinkedinIcon";
 import SmartphoneSVG from "@/assets/svg/SmartphoneSVG";
 import React, { useEffect, useRef, useState } from "react";
-import { View, StyleSheet, Animated, Easing } from "react-native";
+import { View, StyleSheet, Animated, Text } from "react-native";
 import GmailIcon from "@/assets/svg/GmailIcon";
 import WhatsappIcon from "@/assets/svg/Whatsapp";
 import GithubIcon from "@/assets/svg/GithubIcon";
 import DailyDevIcon from "@/assets/svg/DailyDevIcon";
 import ExpoIcon from "@/assets/svg/ExpoIcon";
-import BirdIcon from "@/assets/svg/Bird";
 import AppleIcon from "@/assets/svg/AppleIcon";
+import FavoriteApp from "./FavoriteApp";
+import { format } from "date-fns";
 
 export default function Smartphone() {
   const showScreenAnim = useRef(new Animated.Value(0)).current;
 
   const [isPowerOn, setIsPowerOn] = useState(false);
+
+  const [currentTime, setCurrentTime] = useState("12:00");
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(format(new Date(), "HH:mm"));
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
 
   showScreenAnim.addListener(({ value }) => {
     if (value >= 0.1) {
@@ -29,6 +40,7 @@ export default function Smartphone() {
   const PHONE_WIDTH = 400;
   const PHONE_HEIGHT = 800;
   const ICON_SIZE = 40;
+  const FAVORITE_ICON_SIZE = ICON_SIZE + 10;
 
   const afterLoadAnimation = Animated.parallel([
     Animated.timing(showScreenAnim, {
@@ -54,7 +66,7 @@ export default function Smartphone() {
       width: PHONE_WIDTH,
       height: PHONE_HEIGHT,
       padding: 30,
-      paddingTop: 100,
+      paddingTop: 200,
       overflow: "hidden",
     },
     appRow: {
@@ -63,6 +75,32 @@ export default function Smartphone() {
       alignItems: "center",
       flexWrap: "wrap",
       marginBottom: 30,
+    },
+    bottomBar: {
+      position: "absolute",
+      bottom: 40,
+      left: 0,
+      right: 0,
+      height: 80,
+      backgroundColor: "rgba(255,255,255,0.1)",
+      flexDirection: "row",
+      justifyContent: "space-around",
+      alignItems: "center",
+      marginHorizontal: 24,
+      borderRadius: 25,
+      paddingHorizontal: 20,
+    },
+    clockContainer: {
+      position: "absolute",
+      top: 80,
+      alignItems: "center",
+      width: "85%",
+      zIndex: 2,
+    },
+    clockText: {
+      fontSize: 68,
+      fontFamily: "SpaceMono",
+      color: "#fff",
     },
   });
 
@@ -83,28 +121,12 @@ export default function Smartphone() {
           { transform: [{ translateY }] },
         ]}
       >
-        <View style={styles.appRow}>
-          <App
-            icon={<LinkedinIcon width={ICON_SIZE} height={ICON_SIZE} />}
-            title="Linkedin"
-            iconSize={ICON_SIZE}
-          />
-          <App
-            icon={<GmailIcon width={ICON_SIZE} height={ICON_SIZE} />}
-            title="Gmail"
-            iconSize={ICON_SIZE}
-          />
-          <App
-            icon={<WhatsappIcon width={ICON_SIZE} height={ICON_SIZE} />}
-            title="Whatsapp"
-            iconSize={ICON_SIZE}
-          />
-          <App
-            icon={<GithubIcon width={ICON_SIZE} height={ICON_SIZE} />}
-            title="Github"
-            iconSize={ICON_SIZE}
-          />
-        </View>
+        <>
+          <View style={styles.clockContainer}>
+            <Text style={styles.clockText}>{currentTime}</Text>
+          </View>
+        </>
+
         <View style={styles.appRow}>
           <App
             icon={<DailyDevIcon width={ICON_SIZE} height={ICON_SIZE} />}
@@ -127,6 +149,49 @@ export default function Smartphone() {
             }
             title="Something"
             iconSize={ICON_SIZE}
+          />
+        </View>
+
+        <View style={styles.bottomBar}>
+          <FavoriteApp
+            icon={
+              <LinkedinIcon
+                width={FAVORITE_ICON_SIZE}
+                height={FAVORITE_ICON_SIZE}
+              />
+            }
+            title="Linkedin"
+            iconSize={FAVORITE_ICON_SIZE}
+          />
+          <FavoriteApp
+            icon={
+              <GmailIcon
+                width={FAVORITE_ICON_SIZE}
+                height={FAVORITE_ICON_SIZE}
+              />
+            }
+            title="Gmail"
+            iconSize={FAVORITE_ICON_SIZE}
+          />
+          <FavoriteApp
+            icon={
+              <WhatsappIcon
+                width={FAVORITE_ICON_SIZE}
+                height={FAVORITE_ICON_SIZE}
+              />
+            }
+            title="Whatsapp"
+            iconSize={FAVORITE_ICON_SIZE}
+          />
+          <FavoriteApp
+            icon={
+              <GithubIcon
+                width={FAVORITE_ICON_SIZE}
+                height={FAVORITE_ICON_SIZE}
+              />
+            }
+            title="Github"
+            iconSize={FAVORITE_ICON_SIZE}
           />
         </View>
       </Animated.View>

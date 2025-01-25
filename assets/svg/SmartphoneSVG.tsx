@@ -45,12 +45,13 @@ export default function SmartphoneSVG({
       position: "absolute",
       width: borderWidth,
       height: borderHeight,
-      shadowColor: "#fc0000",
+      shadowColor: "#000",
       shadowOffset: {
-        width: 6,
-        height: 2,
+        width: 0,
+        height: 0,
       },
-      shadowRadius: 999,
+      shadowOpacity: 0.5,
+      shadowRadius: 10,
     },
   });
 
@@ -117,11 +118,33 @@ export default function SmartphoneSVG({
 
       <Svg width={PHONE_WIDTH} height={PHONE_HEIGHT}>
         <Defs>
+          <LinearGradient
+            id="borderGradient"
+            x1="0%"
+            y1="0%"
+            x2="100%"
+            y2="100%"
+          >
+            <Stop offset="0%" stopColor="#444444" stopOpacity="1" />
+            <Stop offset="50%" stopColor="#666666" stopOpacity="1" />
+            <Stop offset="100%" stopColor="#444444" stopOpacity="1" />
+          </LinearGradient>
+
           <LinearGradient id="phoneGradient" x1="0%" y1="0%" x2="0%" y2="100%">
             <Stop offset="0%" stopColor="#4c669f" stopOpacity="1" />
             <Stop offset="100%" stopColor="#7c983b" stopOpacity="1" />
           </LinearGradient>
         </Defs>
+
+        <Rect
+          x={borderMarginWidth - 2}
+          y={borderMarginHeight - 2}
+          width={borderWidth + 4}
+          height={borderHeight + 4}
+          rx={borderRadius + 2}
+          ry={borderRadius + 2}
+          fill="url(#borderGradient)"
+        />
 
         <Rect
           x={backgroundX}
@@ -130,32 +153,50 @@ export default function SmartphoneSVG({
           height={backgroundHeight}
           rx={backgroundRadius}
           ry={backgroundRadius}
-          fill="url(#phoneGradient)"
+          fill={isPowerOn ? "url(#phoneGradient)" : "#000"}
         />
 
-        <View style={styles.border}>
-          {/* Border */}
-          <Rect
-            x={borderMarginWidth}
-            y={borderMarginHeight}
-            width={borderWidth}
-            height={borderHeight}
-            rx={borderRadius}
-            ry={borderRadius}
-            fill={isPowerOn ? "transparent" : "#000"}
-            stroke="#333"
-            strokeWidth={strokeWidth}
-          />
-        </View>
-
-        {/* Notch */}
+        {/* Inner Border Shine */}
         <Rect
-          x={notchX}
-          y={notchY - 2}
-          width={notchWidth}
-          height={notchHeight}
-          rx={notchHeight / 2}
-          ry={notchHeight / 2}
+          x={borderMarginWidth}
+          y={borderMarginHeight}
+          width={borderWidth}
+          height={borderHeight}
+          rx={borderRadius}
+          ry={borderRadius}
+          fill="transparent"
+          stroke="rgba(255,255,255,0.1)"
+          strokeWidth={1}
+        />
+
+        {/* Volume Buttons (Left Side) */}
+        <Rect
+          x={borderMarginWidth - 3}
+          y={borderMarginHeight + borderHeight * 0.2}
+          width={4}
+          height={40}
+          rx={2}
+          ry={2}
+          fill="#333"
+        />
+        <Rect
+          x={borderMarginWidth - 3}
+          y={borderMarginHeight + borderHeight * 0.35}
+          width={4}
+          height={40}
+          rx={2}
+          ry={2}
+          fill="#333"
+        />
+
+        {/* Power Button (Right Side) */}
+        <Rect
+          x={PHONE_WIDTH - borderMarginWidth - 1}
+          y={borderMarginHeight + borderHeight * 0.2}
+          width={4}
+          height={50}
+          rx={2}
+          ry={2}
           fill="#333"
         />
       </Svg>
