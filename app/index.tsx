@@ -4,7 +4,7 @@ import Smartphone from "@/components/Smartphone";
 import { useWindowDimensions } from "react-native";
 import SpaceBackground from "@/components/SpaceBackground";
 import Header from "@/components/Header";
-import TechStack from "@/components/TechStack";
+import TechSection from "@/components/TechSection";
 import Stats from "@/components/Stats";
 
 export default function TabOneScreen() {
@@ -19,6 +19,8 @@ export default function TabOneScreen() {
     },
     scrollView: {
       flexGrow: 1,
+      width: "80%",
+      alignSelf: "center",
     },
     container: {
       flex: 1,
@@ -57,14 +59,17 @@ export default function TabOneScreen() {
             <View style={styles.phoneContainer}>
               <Smartphone />
             </View>
-            <TechStack ICON_SIZE={ICON_SIZE} isSmallScreen={isSmallScreen} />
+            <TechSection ICON_SIZE={ICON_SIZE} isSmallScreen={isSmallScreen} />
             <Stats isSmallScreen={isSmallScreen} />
           </View>
         ) : (
           <>
             <View style={styles.aboutContainer}>
               <Header isSmallScreen={isSmallScreen} />
-              <TechStack ICON_SIZE={ICON_SIZE} />
+              <TechSection
+                ICON_SIZE={ICON_SIZE}
+                isSmallScreen={isSmallScreen}
+              />
               <Stats isSmallScreen={isSmallScreen} />
             </View>
             <View style={styles.phoneContainer}>

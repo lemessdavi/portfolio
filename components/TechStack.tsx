@@ -8,11 +8,13 @@ import NodeIcon from "@/assets/svg/NodeIcon";
 interface TechStackProps {
   ICON_SIZE: number;
   isSmallScreen: boolean;
+  onTechCardPress?: () => void;
 }
 
 export default function TechStack({
   ICON_SIZE,
   isSmallScreen,
+  onTechCardPress,
 }: TechStackProps) {
   const styles = StyleSheet.create({
     techStackContainer: {
@@ -39,15 +41,18 @@ export default function TechStack({
             "rgba(97, 218, 251, 0.15)",
             "rgba(97, 218, 251, 0.05)",
           ]}
+          onPress={onTechCardPress}
         />
         <TechCard
           icon={<ExpoIcon width={ICON_SIZE} height={ICON_SIZE} />}
           title="Expo"
-          subtitle="To do everything"
+          subtitle="RN on Steroids"
+          style={{ marginLeft: 10 }}
           gradientColors={[
-            "rgba(255, 255, 255, 0.15)",
-            "rgba(255, 255, 255, 0.05)",
+            "rgba(255, 245, 103, 0.15)",
+            "rgba(255, 245, 103, 0.05)",
           ]}
+          onPress={onTechCardPress}
         />
       </View>
       <View style={styles.horizontalContainer}>
@@ -60,15 +65,18 @@ export default function TechStack({
             "rgba(49, 120, 198, 0.15)",
             "rgba(49, 120, 198, 0.05)",
           ]}
+          onPress={onTechCardPress}
         />
         <TechCard
           icon={<NodeIcon width={ICON_SIZE} height={ICON_SIZE} />}
           title="Node.js"
           subtitle="JS on the server 😈"
+          style={{ marginLeft: 10 }}
           gradientColors={[
-            "rgba(83, 158, 67, 0.15)",
-            "rgba(83, 158, 67, 0.05)",
+            "rgba(97, 251, 125, 0.15)",
+            "rgba(97, 218, 251, 0.05)",
           ]}
+          onPress={onTechCardPress}
         />
       </View>
     </View>

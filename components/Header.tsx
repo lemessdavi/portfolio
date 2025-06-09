@@ -10,6 +10,7 @@ export default function Header({ isSmallScreen }: HeaderProps) {
       flexDirection: "column",
       backgroundColor: "transparent",
       alignSelf: isSmallScreen ? "center" : "flex-start",
+      textAlign: "left",
     },
     title: {
       fontWeight: "bold",

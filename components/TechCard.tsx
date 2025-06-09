@@ -15,6 +15,7 @@ interface TechCardProps {
   subtitle: string;
   style?: StyleProp<ViewStyle>;
   gradientColors?: string[];
+  onPress?: VoidFunction;
 }
 
 export default function TechCard({
@@ -23,6 +24,7 @@ export default function TechCard({
   subtitle,
   style,
   gradientColors = ["rgba(0, 216, 255, 0.15)", "rgba(0, 216, 255, 0.05)"],
+  onPress,
 }: TechCardProps) {
   const scale = useRef(new Animated.Value(1)).current;
   const rotateAnim = useRef(new Animated.Value(0)).current;
@@ -63,7 +65,11 @@ export default function TechCard({
   });
 
   return (
-    <Pressable onHoverIn={handleHoverIn} onHoverOut={handleHoverOut}>
+    <Pressable
+      onHoverIn={handleHoverIn}
+      onHoverOut={handleHoverOut}
+      onPress={onPress}
+    >
       <Animated.View
         style={[styles.techCard, style, { transform: [{ scale }] }]}
       >

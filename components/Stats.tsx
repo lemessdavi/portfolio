@@ -11,9 +11,8 @@ export default function Stats({ isSmallScreen }: StatsProps) {
       backgroundColor: "transparent",
       alignItems: "center",
       justifyContent: isSmallScreen ? "center" : "flex-start",
-      width: "100%",
+      width: isSmallScreen ? "100%" : "auto",
       paddingHorizontal: isSmallScreen ? 20 : 0,
-      bottom: 0,
     },
     statBlock: {
       flexDirection: isSmallScreen ? "column" : "row",
