@@ -1,17 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import {
+  FlatList,
   StyleSheet,
-  Text,
+  Dimensions,
   View,
-  Image,
-  ScrollView,
   Pressable,
-  Linking,
 } from "react-native";
-
-interface BlogProps {
-  onClose?: () => void;
-}
+import { LinearGradient } from "expo-linear-gradient";
+import { PostCard } from "./PostCard";
+import { PostDetail } from "./PostDetail";
+import { Text } from "./Themed";
 
 interface Post {
   id: number;
@@ -26,7 +24,7 @@ const mockPosts: Post[] = [
     id: 1,
     title: "First Post",
     image: "https://placecats.com/400/200",
-    body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel sapien arcu.",
+    body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel sapien arcu. Vivamus non lorem ut tortor pretium placerat.",
     links: [
       { title: "Read more", url: "https://example.com" },
       { title: "Source", url: "https://example.com" },
@@ -36,92 +34,57 @@ const mockPosts: Post[] = [
     id: 2,
     title: "Second Post",
     image: "https://placecats.com/400/201",
-    body: "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    body: "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
     links: [{ title: "Another link", url: "https://example.com" }],
   },
   {
     id: 3,
     title: "Second Post",
     image: "https://placecats.com/400/201",
-    body: "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    body: "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
     links: [{ title: "Another link", url: "https://example.com" }],
   },
   {
     id: 4,
     title: "Second Post",
     image: "https://placecats.com/400/201",
-    body: "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    body: "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
     links: [{ title: "Another link", url: "https://example.com" }],
   },
+  // ... outros posts
 ];
 
-export default function Blog({ onClose }: BlogProps) {
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
+interface BlogProps {
+  onClose: () => void;
+}
 
-      borderRadius: 40,
-    },
-    back: {
-      color: "#fff",
-      fontSize: 16,
-      marginBottom: 30,
-      marginLeft: 10,
-    },
-    post: {
-      marginBottom: 30,
-      paddingHorizontal: 20,
-    },
-    title: {
-      fontSize: 20,
-      fontWeight: "bold",
-      color: "#fff",
-      marginBottom: 10,
-      fontFamily: "Excalifont",
-    },
-    body: {
-      fontSize: 14,
-      color: "#ccc",
-      marginBottom: 10,
-      fontFamily: "Excalifont",
-    },
-    image: {
-      width: "100%",
-      height: 150,
-      borderRadius: 10,
-      marginBottom: 10,
-    },
-    link: {
-      color: "#7B61FF",
-      marginRight: 15,
-      fontFamily: "Excalifont",
-    },
-  });
+export default function Blog({ onClose }: BlogProps) {
+  const [selected, setSelected] = useState<Post | null>(null);
+
+  if (selected) {
+    return <PostDetail post={selected} onBack={() => setSelected(null)} />;
+  }
 
   return (
     <View style={styles.container}>
-      <Pressable onPress={onClose}>
-        <Text style={styles.back}>Back</Text>
+      <Pressable onPress={onClose} style={styles.backButton}>
+        <Text>Back</Text>
       </Pressable>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        {mockPosts.map((post) => (
-          <View key={post.id} style={styles.post}>
-            <Image source={{ uri: post.image }} style={styles.image} />
-            <Text style={styles.title}>{post.title}</Text>
-            <Text style={styles.body}>{post.body}</Text>
-            <View style={{ flexDirection: "row" }}>
-              {post.links.map((link, index) => (
-                <Pressable
-                  key={index}
-                  onPress={() => Linking.openURL(link.url)}
-                >
-                  <Text style={styles.link}>{link.title}</Text>
-                </Pressable>
-              ))}
-            </View>
-          </View>
-        ))}
-      </ScrollView>
+      <FlatList
+        data={mockPosts}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item, index }) => (
+          <PostCard post={item} index={index} onSelect={setSelected} />
+        )}
+        contentContainerStyle={styles.list}
+        showsVerticalScrollIndicator={false}
+      />
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: { flex: 1 },
+  backButton: { marginLeft: 20, marginBottom: 10 },
+  list: { paddingHorizontal: 20, paddingBottom: 40 },
+});
