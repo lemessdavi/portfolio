@@ -23,6 +23,8 @@ interface Post {
   image: string;
   body: string;
   links: { title: string; url: string }[];
+  category: string;
+  date: string;
 }
 
 interface PostDetailProps {
@@ -53,6 +55,10 @@ export function PostDetail({ post, onBack }: PostDetailProps) {
         </Pressable>
         <ScrollView showsVerticalScrollIndicator={false}>
           <Image source={{ uri: post.image }} style={styles.image} />
+          <View style={styles.metaRow}>
+            <Text style={styles.category}>{post.category}</Text>
+            <Text style={styles.date}>{post.date}</Text>
+          </View>
           <Text style={styles.title}>{post.title}</Text>
           <Text style={styles.body}>{post.body}</Text>
           <View style={styles.links}>
@@ -79,6 +85,13 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     marginBottom: 15,
   },
+  metaRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 6,
+  },
+  category: { color: "#bbb", fontSize: 12 },
+  date: { color: "#bbb", fontSize: 12 },
   title: { fontSize: 24, fontWeight: "bold", color: "#fff", marginBottom: 10 },
   body: { fontSize: 16, color: "#eee", lineHeight: 24, marginBottom: 20 },
   links: { flexDirection: "row", flexWrap: "wrap", marginBottom: 40 },

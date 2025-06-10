@@ -14,6 +14,8 @@ interface Post {
   image: string;
   body: string;
   links: { title: string; url: string }[];
+  category: string;
+  date: string;
 }
 
 interface PostCardProps {
@@ -45,6 +47,10 @@ export function PostCard({ post, onSelect, index }: PostCardProps) {
     <Animated.View style={[styles.card, animStyle]}>
       <Pressable onPress={() => onSelect(post)}>
         <Image source={{ uri: post.image }} style={styles.image} />
+        <View style={styles.metaRow}>
+          <Text style={styles.category}>{post.category}</Text>
+          <Text style={styles.date}>{post.date}</Text>
+        </View>
         <Text style={styles.title}>{post.title}</Text>
         <Text style={styles.body}>{truncate(post.body)}</Text>
       </Pressable>
@@ -63,11 +69,25 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 200,
   },
+  metaRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingHorizontal: 15,
+    marginTop: 10,
+  },
+  category: {
+    color: "#bbb",
+    fontSize: 12,
+  },
+  date: {
+    color: "#bbb",
+    fontSize: 12,
+  },
   title: {
     fontSize: 20,
     fontWeight: "bold",
     color: "#fff",
-    marginTop: 10,
+    marginTop: 6,
     marginHorizontal: 15,
   },
   body: {
