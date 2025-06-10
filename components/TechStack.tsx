@@ -36,7 +36,7 @@ export default function TechStack({
           icon={<ReactNativeIcon width={ICON_SIZE} height={ICON_SIZE} />}
           title="React Native"
           subtitle="Better than Flutter"
-          style={{ marginRight: 10 }}
+          style={{ marginRight: isSmallScreen ? 0 : 10 }}
           gradientColors={[
             "rgba(97, 218, 251, 0.15)",
             "rgba(97, 218, 251, 0.05)",
@@ -47,7 +47,7 @@ export default function TechStack({
           icon={<ExpoIcon width={ICON_SIZE} height={ICON_SIZE} />}
           title="Expo"
           subtitle="RN on Steroids"
-          style={{ marginLeft: 10 }}
+          style={{ marginLeft: isSmallScreen ? 0 : 10 }}
           gradientColors={[
             "rgba(255, 245, 103, 0.15)",
             "rgba(255, 245, 103, 0.05)",
@@ -60,7 +60,7 @@ export default function TechStack({
           icon={<TypeScriptIcon width={ICON_SIZE} height={ICON_SIZE} />}
           title="TypeScript"
           subtitle="To fill it with any"
-          style={{ marginRight: 10 }}
+          style={{ marginRight: isSmallScreen ? 0 : 10 }}
           gradientColors={[
             "rgba(49, 120, 198, 0.15)",
             "rgba(49, 120, 198, 0.05)",
@@ -71,7 +71,7 @@ export default function TechStack({
           icon={<NodeIcon width={ICON_SIZE} height={ICON_SIZE} />}
           title="Node.js"
           subtitle="JS on the server 😈"
-          style={{ marginLeft: 10 }}
+          style={{ marginLeft: isSmallScreen ? 0 : 10 }}
           gradientColors={[
             "rgba(97, 251, 125, 0.15)",
             "rgba(97, 218, 251, 0.05)",

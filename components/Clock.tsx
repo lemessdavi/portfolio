@@ -15,11 +15,9 @@ export default function Clock() {
 
   const styles = StyleSheet.create({
     clockContainer: {
-      position: "absolute",
-      top: 80,
       alignItems: "center",
-      width: "85%",
       zIndex: 2,
+      marginBottom: 40,
     },
     clockText: {
       fontSize: 68,

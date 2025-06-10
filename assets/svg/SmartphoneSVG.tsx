@@ -9,6 +9,7 @@ interface SmartphoneSVGProps {
   PHONE_HEIGHT: number;
   afterLoadAnimation?: Animated.CompositeAnimation;
   isPowerOn: boolean;
+  backgroundColor?: string;
 }
 
 export default function SmartphoneSVG({
@@ -16,6 +17,7 @@ export default function SmartphoneSVG({
   PHONE_HEIGHT,
   afterLoadAnimation,
   isPowerOn,
+  backgroundColor,
 }: SmartphoneSVGProps) {
   const loadingAnim = useRef(new Animated.Value(0)).current;
   const helloAnim = useRef(new Animated.Value(0)).current;
@@ -164,7 +166,7 @@ export default function SmartphoneSVG({
           height={borderHeight}
           rx={borderRadius}
           ry={borderRadius}
-          fill="transparent"
+          fill={backgroundColor || "transparent"}
           stroke="rgba(255,255,255,0.1)"
           strokeWidth={1}
         />

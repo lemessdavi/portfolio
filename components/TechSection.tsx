@@ -53,6 +53,7 @@ export default function TechSection({
     container: {
       justifyContent: "center",
       alignItems: "flex-start",
+      alignSelf: isSmallScreen ? "center" : "flex-start",
     },
   });
 

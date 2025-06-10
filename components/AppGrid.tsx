@@ -4,13 +4,14 @@ import App from "@/components/App";
 import DailyDevIcon from "@/assets/svg/DailyDevIcon";
 import ExpoIcon from "@/assets/svg/ExpoIcon";
 import AppleIcon from "@/assets/svg/AppleIcon";
-import YoutubeIcon from "@/assets/svg/YoutubeIcon";
+import BlogIcon from "@/assets/svg/BlogIcon";
 
 interface AppGridProps {
   ICON_SIZE: number;
+  onBlogPress?: () => void;
 }
 
-export default function AppGrid({ ICON_SIZE }: AppGridProps) {
+export default function AppGrid({ ICON_SIZE, onBlogPress }: AppGridProps) {
   const styles = StyleSheet.create({
     appRow: {
       flexDirection: "row",
@@ -40,12 +41,10 @@ export default function AppGrid({ ICON_SIZE }: AppGridProps) {
         }}
       />
       <App
-        icon={<YoutubeIcon width={ICON_SIZE} height={ICON_SIZE} />}
-        title="Youtube"
+        icon={<BlogIcon width={ICON_SIZE} height={ICON_SIZE} />}
+        title="Blog"
         iconSize={ICON_SIZE}
-        onPress={() => {
-          Linking.openURL("https://www.youtube.com/watch?v=xvFZjo5PgG0");
-        }}
+        onPress={onBlogPress}
       />
       <App
         icon={<AppleIcon fill={"#fff"} width={ICON_SIZE} height={ICON_SIZE} />}
