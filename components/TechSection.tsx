@@ -52,7 +52,7 @@ export default function TechSection({
   const styles = StyleSheet.create({
     container: {
       justifyContent: "center",
-      alignItems: showDigitalCard ? "center" : "flex-start",
+      alignItems: "flex-start",
     },
   });
 
