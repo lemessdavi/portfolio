@@ -3,7 +3,9 @@ import { StyleSheet, Text, View } from "react-native";
 import { format } from "date-fns";
 
 export default function Clock() {
-  const [currentTime, setCurrentTime] = useState("12:00");
+  const [currentTime, setCurrentTime] = useState(() =>
+    format(new Date(), "HH:mm"),
+  );
 
   useEffect(() => {
     const timer = setInterval(() => {
